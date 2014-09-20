@@ -361,7 +361,7 @@ def cron_at_time(strtime):
             reftime += delta
         except:
             return None
-        return [reftime.hour, reftime.minute]
+        return [reftime.month, reftime.day, reftime.hour, reftime.minute]
     else:
         items = strtime.split(":", 1)
         if len(items) >= 2:
@@ -512,7 +512,7 @@ def cron_at_cmd_cb(data, buffer, args):
             weechat.prnt("", "%scron: invalid time \"%s\""
                          % (weechat.prefix("error"), argv[0]))
             return weechat.WEECHAT_RC_OK
-        cron_add(str(hour_min[1]), str(hour_min[0]), "*", "*", "*",
+        cron_add(str(hour_min[3]), str(hour_min[2]), str(hour_min[1]), str(hour_min[0]), "*",
                  "1", argv[1], argv[2] + " " + argv[3])
         return weechat.WEECHAT_RC_OK
     weechat.prnt("", "%scron: invalid arguments" % weechat.prefix("error"))
